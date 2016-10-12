@@ -60,6 +60,7 @@ WORKDIR /tools
 RUN wget http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
 RUN unzip fastqc_v0.11.5.zip
 RUN mv FastQC fastqc 
+RUN chmod +x fastqc/fastqc
 
 WORKDIR /tools
 RUN wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.36.zip
@@ -76,5 +77,7 @@ WORKDIR /home/worker
 RUN chown worker:workergroup /home/worker 
 RUN chown -R worker:workergroup /tools
 
+# link up everything and add to path
+RUN ln -s /tools/fastqc/fastqc /usr/local/bin/fastqc
 USER worker 
 RUN echo "PATH=/tools/bwa:/tools/fastqc/:$PATH" >> .bashrc
