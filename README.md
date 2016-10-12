@@ -7,7 +7,7 @@ Simple Dockerfile base for rna/whole exome seq analysis using pachyderm.
 - [x] [fastqc](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 - [x] [trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
 - [x] [root](https://root.cern.ch/) for CNVnator
-- [] [CNVnator](https://github.com/abyzovlab/CNVnator)
-- [] [GATK](https://software.broadinstitute.org/gatk)
+- [ ] [CNVnator](https://github.com/abyzovlab/CNVnator)
+- [ ] [GATK](https://software.broadinstitute.org/gatk)
 
 
