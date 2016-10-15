@@ -26,7 +26,7 @@ RUN go get github.com/pachyderm/pachyderm && \
 
 RUN apt-get update 
 
-# Now the rest for our pipeline 
+# Get other common pkgs for seq 
 RUN apt-get install -y \
         build-essential \
         zlib1g-dev \
@@ -35,39 +35,9 @@ RUN apt-get install -y \
         wget \ 
         unzip
 
+# Set up tool dir where everything should be installed 
 RUN mkdir /tools
 WORKDIR /tools
-
-RUN wget https://github.com/lh3/bwa/archive/0.7.12.zip 
-RUN unzip 0.7.12.zip
-RUN mv bwa-0.7.12 bwa
-WORKDIR bwa
-RUN make
-ENV PATH="/tools/bwa:${PATH}"
-
-WORKDIR /tools
-RUN wget https://root.cern.ch/download/root_v6.06.08.Linux-ubuntu14-x86_64-gcc4.8.tar.gz
-RUN tar -xzf root_v6.06.08.Linux-ubuntu14-x86_64-gcc4.8.tar.gz
-ENV ROOTSYS="/tools/root"
-ENV LD_LIBRARY_PATH="/tools/root/lib"
-
-WORKDIR /tools
-RUN mkdir picard
-WORKDIR picard
-RUN wget https://github.com/broadinstitute/picard/releases/download/2.6.0/picard.jar
-
-WORKDIR /tools
-RUN wget http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
-RUN unzip fastqc_v0.11.5.zip
-RUN mv FastQC fastqc 
-RUN chmod +x fastqc/fastqc
-
-WORKDIR /tools
-RUN wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.36.zip
-RUN unzip Trimmomatic-0.36
-RUN mv Trimmomatic-0.36 trimmomatic
-
-RUN rm *.zip *.gz 
 
 # Set up worker user 
 RUN groupadd -g 1001 workergroup 
@@ -78,6 +48,4 @@ RUN chown worker:workergroup /home/worker
 RUN chown -R worker:workergroup /tools
 
 # link up everything and add to path
-RUN ln -s /tools/fastqc/fastqc /usr/local/bin/fastqc
 USER worker 
-RUN echo "PATH=/tools/bwa:/tools/fastqc/:$PATH" >> .bashrc
