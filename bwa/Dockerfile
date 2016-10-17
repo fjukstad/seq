@@ -7,10 +7,8 @@ RUN unzip 0.7.12.zip
 RUN mv bwa-0.7.12 bwa
 WORKDIR bwa
 RUN make
-ENV PATH="/tools/bwa:${PATH}"
 
 USER root
-RUN ln -s /tools/bwa/bwa /usr/local/bin/bwa
 
 USER worker 
-ENTRYPOINT ["bwa"]
+ENTRYPOINT ["/tools/bwa/bwa"]
