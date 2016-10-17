@@ -1,6 +1,10 @@
 FROM fjukstad/seqbase
 
 USER root
+
+RUN apt-get update && apt-get install -y \
+	r-base 
+
 WORKDIR /tools
 RUN mkdir picard
 WORKDIR picard
