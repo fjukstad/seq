@@ -24,6 +24,7 @@ RUN go get github.com/pachyderm/pachyderm && \
     go get github.com/pachyderm/pachyderm/src/server/cmd/job-shim && \
     cp $GOPATH/bin/job-shim /job-shim
 
+
 RUN apt-get update 
 
 # Get other common pkgs for seq 
@@ -34,6 +35,8 @@ RUN apt-get install -y \
         default-jre \
         wget \ 
         unzip
+
+ENV JAVA_HOME  /usr/lib/jvm/java-8-openjdk-amd64
 
 # Set up tool dir where everything should be installed 
 RUN mkdir /tools
