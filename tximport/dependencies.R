@@ -1,0 +1,8 @@
+install.packages(c( 'XML', 'RMySQL', 'rtracklayer', 'biomaRt', 'readr', 'rjson'))
+source("https://bioconductor.org/biocLite.R")
+biocLite("tximport")
+biocLite("EnsDb.Hsapiens.v86")
+biocLite("DESeq2")
+biocLite("org.Hs.eg.db")
+biocLite("annotate")
+biocLite("REFSEQ.db")
